@@ -1,0 +1,5 @@
+guard_troop_ptrs_41_mp
+assault_grenadier_mp40
+panzerfusilier_g43
+waffen_mp44_infrared
+jaeger_light_recon_g43
