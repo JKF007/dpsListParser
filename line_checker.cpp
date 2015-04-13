@@ -45,7 +45,7 @@ line_checker::line_checker(){};
         if (tokenizedInput.size() <12){
             return false;
         }
-        std::string name = tokenizedInput[0];
+        std::string name = tokenizedInput.at(0);
 
 
         if(retained(name)){
@@ -59,14 +59,14 @@ line_checker::line_checker(){};
             return false;
         }
 
-        std::string type = tokenizedInput[11];
+        std::string type = tokenizedInput.at(11);
         if(type.compare("small_arms") !=0 ){
             return false;
         }
         int validNum =0;
 
         for (int cellNum = 4; cellNum <=10; cellNum++){
-            string cellString = tokenizedInput[cellNum];
+            string cellString = tokenizedInput.at(cellNum);
 
             int cellVal = std::atoi (cellString.c_str()) ;
             if (cellVal >0){
