@@ -5,7 +5,7 @@
 #include <iostream>
 #include <map>
 #include "line_checker.h"
-#include "string_tokenizer.h"
+#include "toolbox.h"
 #include <regex>
 
 using std::string;
@@ -23,7 +23,7 @@ line_checker::line_checker(){};
         return 1;
     };
 
-    int line_checker::change_list( std::vector< std::string > &list, const std::string& input_file_name){
+    int line_checker::change_list( std::vector< std::string > &thelist, const std::string& input_file_name){
 
         std::ifstream file_stream (input_file_name);
 
@@ -33,7 +33,7 @@ line_checker::line_checker(){};
 
                 std::string input;
                 file_stream >> input;
-                list.push_back(input);
+                thelist.push_back(input);
             }
         }
 
@@ -45,7 +45,7 @@ line_checker::line_checker(){};
         if (tokenizedInput.size() <12){
             return false;
         }
-        std::string name = tokenizedInput[0];
+        std::string name = tokenizedInput.at(0);
 
 
         if(retained(name)){
@@ -59,14 +59,14 @@ line_checker::line_checker(){};
             return false;
         }
 
-        std::string type = tokenizedInput[11];
+        std::string type = tokenizedInput.at(11);
         if(type.compare("small_arms") !=0 ){
             return false;
         }
         int validNum =0;
 
         for (int cellNum = 4; cellNum <=10; cellNum++){
-            string cellString = tokenizedInput[cellNum];
+            string cellString = tokenizedInput.at(cellNum);
 
             int cellVal = std::atoi (cellString.c_str()) ;
             if (cellVal >0){

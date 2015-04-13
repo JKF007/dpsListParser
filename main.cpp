@@ -11,7 +11,7 @@
 #include <fstream>
 #include <iostream>
 #include "line_checker.h"
-#include "string_tokenizer.h"
+#include "toolbox.h"
 
 using std::cout;
 using std::cin;
@@ -26,10 +26,9 @@ int main() {
     cout <<"please enter removal option \n";
     cout <<"1. all small arms \n";
     cout <<"2. infantry weapon only\n";
-
     std::getline(cin, inputLine);
 
-    while ( inputLine.compare("1") !=0 && inputLine.compare("2") !=0) {
+    while ( !checkRange(inputLine,1,2) ) {
 
         cout <<"invalid input, please try again\n";
         cout << inputLine<<std::endl ;
@@ -43,14 +42,28 @@ int main() {
         parser.setList("remove_list_for_adjusted.txt","retain_list_for_adjusted.txt");
     }
 
+    cout <<"please enter operating mode\n";
+    cout <<"1.normal mode\n";
+    cout <<"2.test mode\n";
 
-    input_file.open("test.csv");
+    std::getline(cin, inputLine);
 
-    //input_file.open("coh2WeaponDpsInput.csv");
+    while ( !checkRange(inputLine,1,2) ) {
+
+        cout <<"invalid input, please try again\n";
+        cout << inputLine<<std::endl ;
+        std::getline(cin, inputLine);
+    }
+
+    if(inputLine.compare("1") ==0){
+        input_file.open("coh2WeaponDpsInput.csv");
+    }
+    else{
+        input_file.open("test.csv");
+    }
+
     output_file.open("coh2WeaponDpsOutput.csv");
 
-    //input_file.open("coh2TrueDpsInput.csv");
-    //output_file.open("coh2TrueDpsOutput.csv");
 
     if(input_file.is_open()){
         output_file <<"weapon name,0,10,20,30,40,50,60\n";
@@ -59,7 +72,7 @@ int main() {
             std::string inputLine;
             tokenizedInput.clear();
 
-            input_file >> inputLine;
+            std::getline (input_file,inputLine);
             string_tokenizer(inputLine,tokenizedInput, ',');
 
             if( parser.check(tokenizedInput)){
