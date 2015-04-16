@@ -23,7 +23,6 @@ string rangeCheckedInput (int lower, int upper){
     std::getline(cin, inputLine);
     while ( !checkRange(inputLine,lower,upper) ) {
         cout <<"invalid input, please try again\n";
-        cout << inputLine<<std::endl ;
         std::getline(cin, inputLine);
     }
 
