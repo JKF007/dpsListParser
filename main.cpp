@@ -15,25 +15,33 @@
 
 using std::cout;
 using std::cin;
+using std::string;
+using std::getline;
+
+string rangeCheckedInput (int lower, int upper){
+    string inputLine;
+    std::getline(cin, inputLine);
+    while ( !checkRange(inputLine,lower,upper) ) {
+        cout <<"invalid input, please try again\n";
+        cout << inputLine<<std::endl ;
+        std::getline(cin, inputLine);
+    }
+
+    return inputLine;
+};
 
 int main() {
     std::ifstream input_file;
     std::ofstream output_file;
-    std::vector<std::string> tokenizedInput;
-    std::string inputLine;
+    std::vector<string> tokenizedInput;
+    string inputLine;
     line_checker parser;
 
     cout <<"please enter removal option \n";
     cout <<"1. all small arms \n";
     cout <<"2. infantry weapon only\n";
-    std::getline(cin, inputLine);
 
-    while ( !checkRange(inputLine,1,2) ) {
-
-        cout <<"invalid input, please try again\n";
-        cout << inputLine<<std::endl ;
-        std::getline(cin, inputLine);
-    }
+    inputLine = rangeCheckedInput(1,2);
 
     if(inputLine.compare("1") ==0){
         parser.setList("remove_list.txt","retain_list.txt");
@@ -46,14 +54,7 @@ int main() {
     cout <<"1.normal mode\n";
     cout <<"2.test mode\n";
 
-    std::getline(cin, inputLine);
-
-    while ( !checkRange(inputLine,1,2) ) {
-
-        cout <<"invalid input, please try again\n";
-        cout << inputLine<<std::endl ;
-        std::getline(cin, inputLine);
-    }
+    inputLine = rangeCheckedInput(1,2);
 
     if(inputLine.compare("1") ==0){
         input_file.open("coh2WeaponDpsInput.csv");
@@ -69,7 +70,6 @@ int main() {
         output_file <<"weapon name,0,10,20,30,40,50,60\n";
         while(input_file.good()){
 
-            std::string inputLine;
             tokenizedInput.clear();
 
             std::getline (input_file,inputLine);
@@ -77,11 +77,11 @@ int main() {
 
             if( parser.check(tokenizedInput)){
 
-                std::string weapon_name = tokenizedInput.at(0);
+                string weapon_name = tokenizedInput.at(0);
                 output_file << weapon_name << ",";
 
                 for (int cellNum = 4; cellNum <= 10; cellNum++){
-                    std::string stringToken = tokenizedInput.at(cellNum);
+                    string stringToken = tokenizedInput.at(cellNum);
                     output_file << stringToken <<",";
                 }
                 output_file<<"\n" ;
@@ -94,4 +94,3 @@ int main() {
     output_file.close();
     return 1;
 }
-
