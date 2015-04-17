@@ -47,17 +47,16 @@
     };
 
     int string_tokenizer (const std::string& input, std::vector <std::string> &container , const char& delimiter){
-        int inputIndex =0;
+        size_t inputIndex =0;
         int containerIndex = container.size();
 
         while (inputIndex < input.size()){
-
             if( input.at(inputIndex) == delimiter){
                 inputIndex++;//found delimiter, skip character
             }
             else{
                 container.push_back("");
-                while (inputIndex < input.size() &&input.at(inputIndex) != delimiter ){
+                while (inputIndex < input.size() && input.at(inputIndex) != delimiter){
                     //combine the character until the code hit another delimiter or end of line
                     container.at(containerIndex) += input.at(inputIndex);
                     inputIndex ++;

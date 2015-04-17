@@ -47,7 +47,6 @@ line_checker::line_checker(){};
         }
         std::string name = tokenizedInput.at(0);
 
-
         if(retained(name)){
             return true;
         }
