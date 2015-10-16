@@ -56,17 +56,17 @@ int main() {
     inputLine = rangeCheckedInput(1,2);
 
     if(inputLine.compare("1") ==0){
-        input_file.open("coh2WeaponDpsInput.csv");
+        input_file.open("coh2dps.csv");
     }
     else{
         input_file.open("test.csv");
     }
 
-    output_file.open("coh2WeaponDpsOutput.csv");
+    output_file.open("coh2dpsedited.csv");
 
 
     if(input_file.is_open()){
-        output_file <<"weapon name,0,10,20,30,40,50,60\n";
+        output_file <<"weapon name,0,10,20,30,35,40,45\n";
         while(input_file.good()){
 
             tokenizedInput.clear();

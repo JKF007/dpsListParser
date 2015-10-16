@@ -32,7 +32,7 @@ line_checker::line_checker(){};
             while( file_stream.good() ){
 
                 std::string input;
-                file_stream >> input;
+                std::getline(file_stream , input);
                 thelist.push_back(input);
             }
         }
